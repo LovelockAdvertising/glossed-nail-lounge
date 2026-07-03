@@ -184,7 +184,7 @@ h1,h2,h3{ margin:0; font-family:var(--display); font-weight:600; line-height:1.0
 /* MOBILE-FIRST: logo left, hamburger right; nav is an off-canvas drawer. */
 .site-header{
   position:sticky; top:0; z-index:var(--z-header);
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex; align-items:center; justify-content:center;
   padding:.7rem clamp(1.1rem,4vw,2rem);
   border-bottom:1px solid rgba(221,33,23,.14);
   transition:box-shadow .3s;
@@ -208,7 +208,7 @@ h1,h2,h3{ margin:0; font-family:var(--display); font-weight:600; line-height:1.0
 /* ---- Hamburger button (mobile only) ---- */
 .nav-toggle{
   position:relative; z-index:calc(var(--z-top) + 1);
-  display:inline-flex; flex-direction:column; justify-content:center; gap:5px;
+  display:none; flex-direction:column; justify-content:center; gap:5px;
   width:46px; height:46px; padding:11px; border:none; border-radius:50%;
   background:rgba(255,255,255,.55); cursor:pointer; transition:background .25s;
 }
@@ -280,16 +280,16 @@ body.nav-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-
 /* Mobile sticky Book Now bar - always a tap away */
 .mobile-cta{
   position:fixed; left:0; right:0; bottom:0; z-index:var(--z-sticky);
-  padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom));
+  padding:.5rem 1rem calc(.5rem + env(safe-area-inset-bottom));
   background:rgba(252,224,232,.86);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
   border-top:1px solid rgba(221,33,23,.16);
   display:flex;
 }
-.mobile-cta .btn{ flex:1; justify-content:center; }
+.mobile-cta .btn{ flex:1; justify-content:center; min-height:46px; padding-top:.6rem; padding-bottom:.6rem; }
 @media(min-width:760px){ .mobile-cta{ display:none; } }
-body{ padding-bottom:84px; }               /* room for the fixed bar */
+body{ padding-bottom:72px; }               /* room for the fixed bar */
 @media(min-width:760px){ body{ padding-bottom:0; } }
 
 /* ===========================================================
@@ -1172,7 +1172,7 @@ body{ padding-bottom:84px; }               /* room for the fixed bar */
 
 <!-- ============================ MOBILE STICKY CTA ============================ -->
 <div class="mobile-cta">
-  <a class="btn" href="https://book.squareup.com/appointments/kijq1r4n76xrqt/location/LHGAR1BEBBAAE/services" target="_blank" rel="noopener">Book Now 💅</a>
+  <a class="btn" href="https://book.squareup.com/appointments/kijq1r4n76xrqt/location/LHGAR1BEBBAAE/services" target="_blank" rel="noopener">Book Now</a>
 </div>
 
 <script>
