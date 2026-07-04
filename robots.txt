@@ -1,0 +1,6 @@
+# Glossed Nail Lounge — robots.txt
+# Allow all reputable crawlers full access.
+User-agent: *
+Allow: /
+
+Sitemap: https://glossednaillounge.com/sitemap.xml
