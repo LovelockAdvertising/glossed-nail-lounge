@@ -416,7 +416,7 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
 /* soft pink arch / glow behind her */
 .about__photo-bg{
   position:absolute; z-index:1; left:50%; bottom:0; transform:translateX(-50%);
-  width:90%; height:83%;
+  width:96%; height:104%;
   background:
     radial-gradient(120% 75% at 50% 22%, rgba(255,255,255,.6), transparent 55%),
     linear-gradient(165deg, var(--pink), var(--blush));
@@ -428,12 +428,12 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
   border:1px solid rgba(201,162,75,.5);
   border-radius:999px 999px 38px 38px;
 }
-/* Summer herself, in front; bottom fades so the mid-thigh cut dissolves */
+/* Summer herself, in front; soft dissolve right at the crop line below her hair */
 .about__cutout{
   position:relative; z-index:2; width:100%; display:block;
   filter:drop-shadow(0 22px 24px rgba(176,30,60,.30));
-  -webkit-mask-image:linear-gradient(to bottom, #000 85%, transparent 100%);
-          mask-image:linear-gradient(to bottom, #000 85%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom, #000 93%, transparent 100%);
+          mask-image:linear-gradient(to bottom, #000 93%, transparent 100%);
 }
 .about__photo .star{ z-index:3; }            /* sparkles sit in front of her */
 .about__badge{
@@ -963,7 +963,7 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
     <div class="wrap about__grid">
       <div class="about__photo reveal">
         <span class="about__photo-bg" aria-hidden="true"></span>
-        <img class="about__cutout" src="assets/web-summer-v2.webp" width="465" height="950"
+        <img class="about__cutout" src="assets/web-summer-crop.webp" width="465" height="610"
              alt="Summer, founder and nail artist at Glossed Nail Lounge, on the Gold Coast" loading="lazy" />
         <div class="about__badge" aria-hidden="true"><span>est.</span><b>2022</b><span>GC</span></div>
         <span class="star twinkle d2"      style="top:11%; left:-3%;  font-size:1.3rem; color:var(--gold)"><svg><use href="#spark"/></svg></span>
