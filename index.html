@@ -562,6 +562,79 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
 .tier--elite .tier__media{ background:radial-gradient(120% 100% at 30% 10%, rgba(255,255,255,.7), transparent 60%), linear-gradient(160deg,#ffe7f0, var(--pink)); }
 
 /* ===========================================================
+   7b. REVIEWS - "Rave reviews" masonry of client love.
+   Cream cards on a pink band so they pop between the cream
+   About section above and the blush Tiers section below.
+   The 5 gold sparkles are DECORATIVE only (aria-hidden) - they
+   reuse the tier-meter visual language, not a real star rating.
+   =========================================================== */
+.reviews{ background:linear-gradient(165deg, var(--pink-logo), var(--blush)); }
+.reviews__head{ text-align:center; max-width:600px; margin:0 auto clamp(2rem,5vw,3rem); }
+.reviews__head h2{ font-size:clamp(2.2rem,7vw,3.6rem); color:var(--cherry); }
+.reviews__head h2 em{ font-style:italic; }
+.reviews__head p{ margin-top:var(--sp-2); }
+
+/* Auto-scrolling carousel (marquee): a slow, continuous ribbon of
+   cards. The card set is duplicated so the loop is seamless (the
+   duplicate group is aria-hidden). It pauses on hover / keyboard
+   focus. Reduced-motion users get a normal horizontal scroll. */
+.reviews__marquee{
+  position:relative; overflow:hidden;
+  /* soft fade at both edges so cards glide in and out of view */
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.reviews__track{ display:flex; width:max-content; animation:reviewScroll 80s linear infinite; }
+.reviews__marquee:hover .reviews__track,
+.reviews__track:focus-within{ animation-play-state:paused; }
+.reviews__group{ display:flex; }
+@keyframes reviewScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+.review{
+  flex:0 0 auto;
+  width:clamp(272px, 80vw, 340px);
+  margin-right:clamp(1rem,2.4vw,1.6rem);
+  position:relative;
+  display:flex; flex-direction:column;
+  background:var(--cream);
+  border:1px solid rgba(201,162,75,.28);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-card);
+  padding:clamp(1.5rem,4vw,2rem) clamp(1.4rem,3.6vw,1.9rem) clamp(1.35rem,3.4vw,1.6rem);
+  overflow:hidden;
+}
+/* big translucent opening-quote watermark, top-right corner */
+.review__mark{
+  position:absolute; top:-.28em; right:.12em;
+  font-family:var(--display); font-style:italic; font-weight:900;
+  font-size:6rem; line-height:1; color:rgba(247,168,196,.4);
+  pointer-events:none; user-select:none;
+}
+/* decorative 5-sparkle "rating" - purely for looks (not a real score) */
+.review__stars{ display:flex; gap:.32rem; margin-bottom:.9rem; color:var(--gold); }
+.review__stars span{ width:15px; height:15px; }
+.review__stars svg{ width:100%; height:100%; fill:currentColor; }
+.review__text{ font-size:1rem; line-height:1.62; margin:0 0 1.1rem; max-width:34ch; position:relative; }
+.review__name{
+  font-family:var(--display); font-style:italic; font-weight:600;
+  font-size:1.18rem; color:var(--cherry); margin:auto 0 0;   /* pin to card bottom */
+}
+.review__name::before{ content:"\2014\00a0"; color:var(--gold); font-style:normal; }
+
+/* Reduced-motion: stop the auto-scroll, hide the duplicate set, and
+   let the ribbon be scrolled by hand instead. */
+@media (prefers-reduced-motion: reduce){
+  .reviews__marquee{
+    overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x proximity;
+    -webkit-mask-image:none; mask-image:none;
+  }
+  .reviews__track{ animation:none; }
+  .reviews__group[aria-hidden="true"]{ display:none; }
+  .review{ scroll-snap-align:center; }
+}
+
+/* ===========================================================
    8. INSTAGRAM - a plain, tight photo grid (no captions/likes/
    third-party widget chrome). Every tile links out to the profile.
    =========================================================== */
@@ -901,6 +974,7 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
   <nav class="nav" id="site-nav" aria-label="Primary">
     <ul class="nav__list">
       <li><a class="nav__link" href="#about">About</a></li>
+      <li><a class="nav__link" href="#reviews">Reviews</a></li>
       <li><a class="nav__link" href="#tiers">The Tiers</a></li>
       <li><a class="nav__link" href="#faq">FAQ</a></li>
     </ul>
@@ -977,6 +1051,210 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
         <p>I specialise in BIAB nails (Builder Gel) and love creating everything from clean, timeless sets to fun, colourful nail art. Whether you're after something simple or want to go all out with a funky, creative design, I'm always excited to bring your ideas to life.</p>
         <p>Every set is created with care, attention to detail, and designed to suit your style. My goal is for you to leave feeling confident, relaxed, and obsessed with your new nails.</p>
         <p class="signoff">I can't wait to see you in my chair ♡</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ REVIEWS ============================ -->
+  <!-- ================================================================ -->
+  <!--  Real client reviews, kept verbatim (original spelling & typos    -->
+  <!--  preserved by request). The 5 gold sparkles are decorative only.  -->
+  <!-- ================================================================ -->
+  <section class="section reviews" id="reviews" aria-labelledby="reviews-h">
+    <!-- stars: cream + gold + cherry read well on the pink background -->
+    <div class="deco" aria-hidden="true">
+      <span class="star twinkle d1"      style="top:8%;  left:5%;  font-size:1.5rem; color:var(--cream)"><svg><use href="#spark"/></svg></span>
+      <span class="star twinkle d3 slow" style="top:16%; right:6%; font-size:2rem;   color:var(--gold)"><svg><use href="#spark"/></svg></span>
+      <span class="star twinkle d2"      style="top:52%; left:3%;  font-size:1rem;   color:var(--cherry)"><svg><use href="#spark"/></svg></span>
+      <span class="star twinkle d4"      style="bottom:12%; right:5%; font-size:1.6rem; color:var(--cream)"><svg><use href="#spark"/></svg></span>
+      <span class="star twinkle d5 fast" style="bottom:9%; left:9%; font-size:1.05rem; color:var(--gold)"><svg><use href="#spark"/></svg></span>
+      <span class="star twinkle d2 slow" style="top:40%; right:11%; font-size:.85rem; color:var(--cream)"><svg><use href="#spark"/></svg></span>
+    </div>
+    <div class="wrap">
+      <div class="reviews__head reveal">
+        <p class="eyebrow">The love</p>
+        <h2 id="reviews-h">Rave <em>reviews</em></h2>
+        <p>Real words from the Glossed girlies. My chair is my happy place, and hearing this back is everything. 💖</p>
+        <div class="divider" style="margin-top:1.4rem" aria-hidden="true"><span class="sparkle"><svg viewBox="0 0 24 24"><path d="M12 0c.6 6.6 4.8 10.8 11.4 11.4C16.8 12 12.6 16.2 12 22.8 11.4 16.2 7.2 12 .6 11.4 7.2 10.8 11.4 6.6 12 0Z"/></svg></span></div>
+      </div>
+
+      <!-- Slow auto-scrolling carousel. The 8 cards live in .reviews__group;
+           the SECOND group is an exact aria-hidden copy so the loop is seamless.
+           When you swap in the real reviews, update BOTH copies of each card
+           (or tell me and I'll regenerate the duplicate for you). -->
+      <div class="reviews__marquee reveal">
+        <div class="reviews__track">
+
+          <div class="reviews__group">
+
+            <!-- REVIEW 1 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">I honestly couldn’t recommend Glossed enough! From the moment you walk in, you feel so welcomed and looked after. The attention to detail is unmatched, and every set I’ve gotten has been absolutely perfect. You can tell how much love and care goes into her work, and the results always speak for themselves! My nails always last long, look amazing, and I’m constantly getting compliments on them. If you’re looking for someone who genuinely cares about their clients and takes pride in what they do, Glossed is the place to go!</p>
+              <p class="review__name">Tayla S</p>
+            </article>
+
+            <!-- REVIEW 2 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">Honestly, I couldn’t recommend her enough!  She’s so funny, kind and genuinely such a lovely person. She makes you feel so comfortable and welcome from the second you walk in, and she’s always so nice and easy to chat to. Her work is AMAZING and she somehow manages to make my nails look exactly like the inspo pic every single time!  She’s so talented and clearly loves what she does. I always leave loving my nails and having such a good time. Couldn’t ask for a better nail tech!</p>
+              <p class="review__name">Bella S</p>
+            </article>
+
+            <!-- REVIEW 3 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">The absolute BEST nails &amp; service on the Gold Coast. I used to go to the standard salon and my nails were so weak and brittle, when I started going to Summer at Glossed, my nails were so much healthier and she actually cared about them looking good. She is so so friendly and her space was always so beautiful and clean. I would recommend her to anyone</p>
+              <p class="review__name">Kirra G</p>
+            </article>
+
+            <!-- REVIEW 4 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">I’ve been going to Glossed for a while now and honestly wouldn’t go anywhere else! Summer is so lovely and welcoming, and always makes you feel comfortable from the second you walk in. She’s so good at what she does and I’m always obsessed with my nails when I leave. I love that she’s always happy to try different designs and ideas, and she somehow manages to make them look even better than I imagined every single time. Appointments are always such a good time and I genuinely look forward to getting my nails done. Couldn’t recommend Summer and Glossed enough!</p>
+              <p class="review__name">Tayla D</p>
+            </article>
+
+            <!-- REVIEW 5 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">Absolutely love my experience at Glossed Nail Lounge! The salon is cute and has such a great vibe. Such a good experience from start to finish, I will definitely be back.</p>
+              <p class="review__name">Samara A</p>
+            </article>
+
+            <!-- REVIEW 6 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">Summer is absolutely incredible and so meticulous with her BIAB manicures! After getting my nails done with Summer I cannot go anywhere else as her quality and attention to detail is exceptional. Cannot recommend her enough :)</p>
+              <p class="review__name">Florence H</p>
+            </article>
+
+            <!-- REVIEW 7 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">Summer is the owner of glossed and she is so pretty and fit and kind. Every time I see her I think just wow how lucky am I to spend the next 2 hours with her. It’s always a plus to get nails as beautiful and long and strong as her</p>
+              <p class="review__name">Tayla D</p>
+            </article>
+
+            <!-- REVIEW 8 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">What a welcoming experience summer offers ! My nails are perfect every time and Id recommend her to anyone!!</p>
+              <p class="review__name">Jacque E</p>
+            </article>
+
+          </div>
+
+          <!-- Seamless-loop duplicate (exact copy of the group above) -->
+          <div class="reviews__group" aria-hidden="true">
+
+            <!-- REVIEW 1 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">I honestly couldn’t recommend Glossed enough! From the moment you walk in, you feel so welcomed and looked after. The attention to detail is unmatched, and every set I’ve gotten has been absolutely perfect. You can tell how much love and care goes into her work, and the results always speak for themselves! My nails always last long, look amazing, and I’m constantly getting compliments on them. If you’re looking for someone who genuinely cares about their clients and takes pride in what they do, Glossed is the place to go!</p>
+              <p class="review__name">Tayla S</p>
+            </article>
+
+            <!-- REVIEW 2 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">Honestly, I couldn’t recommend her enough!  She’s so funny, kind and genuinely such a lovely person. She makes you feel so comfortable and welcome from the second you walk in, and she’s always so nice and easy to chat to. Her work is AMAZING and she somehow manages to make my nails look exactly like the inspo pic every single time!  She’s so talented and clearly loves what she does. I always leave loving my nails and having such a good time. Couldn’t ask for a better nail tech!</p>
+              <p class="review__name">Bella S</p>
+            </article>
+
+            <!-- REVIEW 3 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">The absolute BEST nails &amp; service on the Gold Coast. I used to go to the standard salon and my nails were so weak and brittle, when I started going to Summer at Glossed, my nails were so much healthier and she actually cared about them looking good. She is so so friendly and her space was always so beautiful and clean. I would recommend her to anyone</p>
+              <p class="review__name">Kirra G</p>
+            </article>
+
+            <!-- REVIEW 4 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">I’ve been going to Glossed for a while now and honestly wouldn’t go anywhere else! Summer is so lovely and welcoming, and always makes you feel comfortable from the second you walk in. She’s so good at what she does and I’m always obsessed with my nails when I leave. I love that she’s always happy to try different designs and ideas, and she somehow manages to make them look even better than I imagined every single time. Appointments are always such a good time and I genuinely look forward to getting my nails done. Couldn’t recommend Summer and Glossed enough!</p>
+              <p class="review__name">Tayla D</p>
+            </article>
+
+            <!-- REVIEW 5 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">Absolutely love my experience at Glossed Nail Lounge! The salon is cute and has such a great vibe. Such a good experience from start to finish, I will definitely be back.</p>
+              <p class="review__name">Samara A</p>
+            </article>
+
+            <!-- REVIEW 6 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">Summer is absolutely incredible and so meticulous with her BIAB manicures! After getting my nails done with Summer I cannot go anywhere else as her quality and attention to detail is exceptional. Cannot recommend her enough :)</p>
+              <p class="review__name">Florence H</p>
+            </article>
+
+            <!-- REVIEW 7 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">Summer is the owner of glossed and she is so pretty and fit and kind. Every time I see her I think just wow how lucky am I to spend the next 2 hours with her. It’s always a plus to get nails as beautiful and long and strong as her</p>
+              <p class="review__name">Tayla D</p>
+            </article>
+
+            <!-- REVIEW 8 -->
+            <article class="review">
+              <span class="review__mark" aria-hidden="true">&ldquo;</span>
+              <div class="review__stars" aria-hidden="true">
+                <span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span><span><svg><use href="#spark"/></svg></span>
+              </div>
+              <p class="review__text">What a welcoming experience summer offers ! My nails are perfect every time and Id recommend her to anyone!!</p>
+              <p class="review__name">Jacque E</p>
+            </article>
+
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
