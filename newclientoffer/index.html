@@ -388,7 +388,8 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
     /* anchored to the hero's true bottom-left corner (hero has no border, so
        left:0 / bottom:0 = the viewport edge) */
     position:absolute; left:0; bottom:0; margin:0;
-    width:min(37%, 440px); z-index:1;
+    width:min(32%, 385px); z-index:1;          /* a touch smaller */
+    transform:translateY(30px);                /* nudge the frog nail lower from the top; wrist end is clipped by the hero's overflow:hidden */
   }
   /* DESKTOP: content is the right ~56%, the nail photo fills the bottom-left.
      The upper-left band is the only text-free, photo-free zone - scatter them there. */
