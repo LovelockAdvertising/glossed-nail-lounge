@@ -363,11 +363,14 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
 
 /* decorative sparkles scattered like her posts */
 .hero__star{ position:absolute; z-index:1; color:var(--cherry); }
-.hero__star.s1{ top:14%; left:8%; font-size:1.5rem; color:var(--gold); }
-.hero__star.s2{ top:9%; right:9%; font-size:2.4rem; color:var(--cherry); }
-.hero__star.s3{ top:42%; right:6%; font-size:1.3rem; color:var(--gold); }
-.hero__star.s4{ bottom:14%; right:12%; font-size:1.7rem; color:var(--cherry); }
-.hero__star.s5{ top:60%; right:20%; font-size:1rem; color:var(--gold); }
+/* MOBILE/TABLET (base): the hero is content-driven and very tall, so any mid-height
+   percentage star drifts onto the text between 375px and 880px. Keep them in the
+   corners only - the one zone that stays clear of copy at every width. */
+.hero__star.s1{ top:2%; left:4%;   font-size:1.2rem; color:var(--gold); }   /* top-left  */
+.hero__star.s2{ top:2%; right:4%;  font-size:1.6rem; color:var(--cherry); } /* top-right */
+.hero__star.s3{ bottom:2%; right:6%; font-size:1.2rem; color:var(--gold); } /* bottom-right, clear of the photo */
+.hero__star.s4{ display:none; }
+.hero__star.s5{ display:none; }
 
 /* DESKTOP: image full-bleeds the bottom-left corner, title sits on the right */
 @media(min-width:880px){
@@ -387,7 +390,13 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
     position:absolute; left:0; bottom:0; margin:0;
     width:min(37%, 440px); z-index:1;
   }
-  .hero__star.s1{ left:46%; }
+  /* DESKTOP: content is the right ~56%, the nail photo fills the bottom-left.
+     The upper-left band is the only text-free, photo-free zone - scatter them there. */
+  .hero__star.s1{ top:13%; left:7%;  right:auto; bottom:auto; font-size:1.5rem; }
+  .hero__star.s2{ top:6%;  left:30%; right:auto; bottom:auto; font-size:2rem; }
+  .hero__star.s3{ top:26%; left:5%;  right:auto; bottom:auto; font-size:1.3rem; display:inline-block; }
+  .hero__star.s4{ top:5%;  left:17%; right:auto; bottom:auto; font-size:1.6rem; display:inline-block; }
+  .hero__star.s5{ top:4%;  left:41%; right:auto; bottom:auto; font-size:1.1rem; display:inline-block; }
 }
 
 /* ===========================================================
