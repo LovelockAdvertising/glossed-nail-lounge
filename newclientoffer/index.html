@@ -337,24 +337,13 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
 .hero__content{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:flex-start; text-align:left; }
 .hero__content .eyebrow{ margin-bottom:var(--sp-2); }
 
-/* The BIG two-tone title: 'Luxury,' solid italic + 'but make it nails' outlined */
+/* The BIG title: both lines solid italic cherry (one consistent form) */
 .hero__tagline{
   font-size:clamp(2.4rem, 8vw, 4.8rem);
   line-height:.96; letter-spacing:-.02em;
   color:var(--cherry); margin:0 0 var(--sp-3);
 }
 .hero__tagline em{ display:block; font-style:italic; font-weight:600; }
-.hero__tagline .outline{
-  display:block; font-style:normal; font-weight:800;
-  color:transparent;
-  -webkit-text-stroke-width:clamp(1.4px, .42vw, 3.2px);
-  -webkit-text-stroke-color:var(--cherry);
-  text-stroke:clamp(1.4px, .42vw, 3.2px) var(--cherry);
-}
-/* fallback if text-stroke is unsupported: show solid so it's never invisible */
-@supports not ((-webkit-text-stroke: 1px red) or (text-stroke: 1px red)){
-  .hero__tagline .outline{ color:var(--cherry); }
-}
 .hero__sub{
   font-size:clamp(1rem,2.6vw,1.12rem); font-weight:500; color:var(--ink);
   max-width:34ch; margin:0 0 var(--sp-4); opacity:.92;
@@ -1074,7 +1063,7 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
       <div class="hero__content">
         <h1 class="hero__tagline reveal d1">
           <em>Be the girl with the</em>
-          <span class="outline">nails everyone asks about</span>
+          <em>nails everyone asks about</em>
         </h1>
         <p class="hero__sub reveal d2">Book the set you'd normally talk yourself out of. Your first two with me are both upgraded free, so whatever tier you pick, I charge you the one below it.</p>
         <div class="countdown reveal d2" data-deadline="2026-08-31T23:59:59+10:00" aria-label="Time left to claim the new client offer">
