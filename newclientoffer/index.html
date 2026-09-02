@@ -1103,7 +1103,7 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
         <p class="hero__sub reveal d2">Book the set you'd normally talk yourself out of. Your first two with me are both upgraded free, so whatever tier you pick, I charge you the one below it.</p>
         <div class="hero__cta reveal d2">
           <div class="hero__cta-row">
-            <div class="countdown" data-deadline="2026-08-31T23:59:59+10:00" aria-label="Time left to claim the new client offer">
+            <div class="countdown" data-deadline-mode="end-of-month" aria-label="Time left to claim the new client offer">
               <span class="countdown__label">Offer ends in</span>
               <div class="cd"><b data-cd="d">--</b><small>days</small></div>
               <div class="cd"><b data-cd="h">--</b><small>hrs</small></div>
@@ -1559,7 +1559,7 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
       <p class="eyebrow reveal">Last call</p>
       <h2 id="book-h" class="reveal d1">Okay but seriously, <em>this ends soon.</em></h2>
       <p class="book__sub reveal d1">It's just me and one chair, so there's only so many new client spots. And you're getting your nails done this month anyway, so you may as well go a tier up. Free. Twice.</p>
-      <div style="display:flex; justify-content:center; margin:var(--sp-4) 0;"><div class="countdown reveal d1" data-deadline="2026-08-31T23:59:59+10:00" aria-label="Time left to claim the new client offer">
+      <div style="display:flex; justify-content:center; margin:var(--sp-4) 0;"><div class="countdown reveal d1" data-deadline-mode="end-of-month" aria-label="Time left to claim the new client offer">
           <span class="countdown__label">Offer ends in</span>
           <div class="cd"><b data-cd="d">--</b><small>days</small></div>
           <div class="cd"><b data-cd="h">--</b><small>hrs</small></div>
@@ -1637,15 +1637,29 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
 })();
 
 /* ---- Countdown timer(s) ---- */
+/* A node with data-deadline-mode="end-of-month" rolls over by itself: it always
+   counts down to the last second of the current month, Brisbane time (+10:00,
+   QLD has no daylight saving), so the offer never quietly expires again.
+   A plain data-deadline="2026-12-31T23:59:59+10:00" still works for a one-off. */
 (function(){
   var nodes = Array.prototype.slice.call(document.querySelectorAll('.countdown'));
   if(!nodes.length) return;
+  var AEST = 10*3600000;
   function pad(v){ return (v<10?'0':'')+v; }
   function set(n,k,v){ var el=n.querySelector('[data-cd="'+k+'"]'); if(el) el.textContent = pad(v); }
+  function endOfMonth(now){
+    var wall = new Date(now + AEST); /* shift into Brisbane time, then read as UTC */
+    var y = wall.getUTCFullYear(), m = wall.getUTCMonth();
+    var end = Date.UTC(y, m+1, 1) - AEST - 1000; /* 23:59:59 +10:00 on the last day */
+    if(end <= now) end = Date.UTC(y, m+2, 1) - AEST - 1000; /* inside that final second */
+    return end;
+  }
   function tick(){
     var now = Date.now();
     nodes.forEach(function(n){
-      var end = new Date(n.getAttribute('data-deadline')).getTime();
+      var end = n.getAttribute('data-deadline-mode') === 'end-of-month'
+              ? endOfMonth(now)
+              : new Date(n.getAttribute('data-deadline')).getTime();
       var diff = end - now;
       if(diff <= 0){ n.classList.add('is-over'); return; }
       set(n,'d', Math.floor(diff/86400000));
