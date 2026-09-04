@@ -411,8 +411,8 @@ body{ padding-bottom:72px; }               /* room for the fixed bar */
 @media(min-width:820px){ .about__grid{ grid-template-columns:.85fr 1.15fr; } }
 
 /* Summer as a floating cut-out standing on a soft arch backdrop */
-.about__photo{ position:relative; width:min(100%, 400px); margin-inline:auto; padding-top:var(--sp-3); }
-@media(min-width:820px){ .about__photo{ width:min(100%, 300px); } }   /* smaller cut-out on desktop */
+.about__photo{ position:relative; width:min(100%, 260px); margin-inline:auto; padding-top:var(--sp-3); }   /* mobile: keep the cut-out modest so she does not dominate the section */
+@media(min-width:820px){ .about__photo{ width:min(100%, 300px); } }   /* desktop has room for a slightly larger cut-out */
 /* soft pink arch / glow behind her */
 .about__photo-bg{
   position:absolute; z-index:1; left:50%; bottom:0; transform:translateX(-50%);
